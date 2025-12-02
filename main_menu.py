@@ -9,10 +9,12 @@ class MainMenu:
         self.screen = screen
         self.gui = GUI()
 
-
         self.gui.add_button(Button(100, 100, text="Start", callback=start_callback))
         self.gui.add_button(Button(100, 200, text="Settings", callback=settings_callback))
         self.gui.add_text(Text(50, 50, "Main Menu"))
+
+
+
 
     def draw(self):
         self.screen.fill((0,0,0))
@@ -21,7 +23,7 @@ class MainMenu:
         for text in self.gui._texts:
             text.draw(self.screen)
 
-    def update(self):
+    async def update(self):
         pass
 
 

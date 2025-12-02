@@ -6,6 +6,7 @@ class GUI:
         self._buttons: list[Button] = []
         self._texts: list[Text] = []
 
+
     def add_button(self, button):
         self._buttons.append(button)
 
@@ -15,6 +16,10 @@ class GUI:
     @property
     def buttons(self):
         return self._buttons
+
+    @property
+    def texts(self):
+        return self._texts
 
     def check_buttons(self):
         mx, my = pygame.mouse.get_pos()

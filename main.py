@@ -21,7 +21,7 @@ class Game:
 
         self.main_window = MainMenu(self.screen,
                                     start_callback=self.start_battle,
-                                    settings_callback=self.open_settings)
+                                    settings_callback=None)
 
 
 
@@ -35,8 +35,7 @@ class Game:
     def start_battle(self):
         self.current_window = self.battle
 
-    def open_settings(self):
-        self.current_window = self.setting_window
+
 
     async def run(self):
         while True:
@@ -48,7 +47,7 @@ class Game:
 
 
             self.current_window.gui.check_buttons()
-            self.current_window.update()
+            await self.current_window.update()
 
             self.current_window.draw()
 
