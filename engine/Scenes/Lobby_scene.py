@@ -1,7 +1,7 @@
 import pygame
 
 from engine.Scenes.BaseScene import Scene
-from engine.Scenes.MainMenu_scene import MainMenu
+
 from engine.Settings.settings import Colors
 
 class Lobby(Scene):
@@ -21,6 +21,5 @@ class Lobby(Scene):
 
 
 
-    def handle_event(self, keyboard, mouse):
-        if keyboard[pygame.K_SPACE]:
-            self.sceneManager.change_scene(MainMenu)
+    def handle_event(self,event):
+        pass

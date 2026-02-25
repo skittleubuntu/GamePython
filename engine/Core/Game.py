@@ -2,8 +2,10 @@ import pygame
 
 from engine.Core.SceneManager import SceneManager
 from engine.Scenes.MainMenu_scene import MainMenu
-from engine.Systems.InputSystems import InputSystems
+
 from engine.Settings.settings import Colors, Settings
+from engine.Systems.EventSystem import Event, EventSystem
+
 
 class Game:
     def __init__(self):
@@ -15,9 +17,10 @@ class Game:
         self.clock = pygame.time.Clock()
 
         #engine systems
-        self.inputSystem = InputSystems()
-        self.sceneManager = SceneManager(self.screen)
+
+        self.sceneManager = SceneManager(self.screen, self.clock)
         self.sceneManager.change_scene(MainMenu)
+        self.eventSystem = EventSystem(self.sceneManager)
 
 
 
@@ -30,6 +33,9 @@ class Game:
         while running:
             #event loop
             for event in pygame.event.get():
+
+                # handle events
+                self.sceneManager.handle(event)
                 if event.type == pygame.QUIT:
                     running = False
 
@@ -38,14 +44,9 @@ class Game:
             #game loop
             self.screen.fill(Colors.BLACK)
 
-
-            #get input data
-            keyboard = self.inputSystem.get_keyboard()
-            mouse = self.inputSystem.get_mouse()
-
-
-            #handle events
-            self.sceneManager.handle(keyboard, mouse)
+            if self.sceneManager.event:
+                print(self.sceneManager.event)
+                self.eventSystem.procces(self.sceneManager.event)
 
 
             pygame.display.flip()
