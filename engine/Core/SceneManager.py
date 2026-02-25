@@ -7,20 +7,24 @@ class SceneManager():
         self.scene = None
         self.screen = screen
         self.clock = clock
-        self.event = None
+        self.event = []
+        self.keyboard = pygame.key
+        self.mouse = pygame.mouse
 
     #change the current scene
     def change_scene(self, scene):
         self.scene = scene(self)
 
-    #full update of scene and render
-    def handle(self,event):
-        self.scene.handle_event(event)
-        self.scene.update()
-        print("SceneRender")
+
+    #handle events
+    def handle(self,):
+        self.scene.handle_button()
+
+
+    def render_scene(self):
         self.scene.render(self.screen)
 
 
     #send event to core (engine)
     def add_event(self, event):
-        self.event = event
+        self.event.append(event)
