@@ -16,8 +16,13 @@ class Lobby(Scene):
     # check the pressed button
     def handle_button(self):
         key = pygame.key.get_pressed()
-        if key[pygame.K_SPACE]:
+
+        inputSystem = self.sceneManager.inputSystem
+
+        if key[pygame.K_SPACE] and not inputSystem.is_held(pygame.K_SPACE):
             self.sceneManager.add_event(Event.MAIN_MENU)
+            print("Switch to main menu")
+
 
         if key[pygame.K_ESCAPE]:
             self.sceneManager.add_event(Event.QUIT_GAME)

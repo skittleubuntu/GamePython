@@ -15,7 +15,6 @@ class MainMenu(Scene):
 
         #self scene manager for control scenes
         self.sceneManager = sceneManager
-
         self.player = Player()
 
 
@@ -30,21 +29,19 @@ class MainMenu(Scene):
 
     #check the pressed button
     def handle_button(self):
-        key = pygame.key.get_pressed()
 
-        if key[pygame.K_w]:
+        inputSystem = self.sceneManager.inputSystem
+
+        if inputSystem.key[pygame.K_w]:
             self.player.y -= 5
-        if key[pygame.K_s]:
+        if inputSystem.key[pygame.K_s]:
             self.player.y += 5
-        if key[pygame.K_d]:
+        if inputSystem.key[pygame.K_d]:
             self.player.x += 5
-        if key[pygame.K_a]:
+        if inputSystem.key[pygame.K_a]:
             self.player.x -= 5
 
-        if key[pygame.K_SPACE]:
-
+        if inputSystem.key[pygame.K_SPACE] and not inputSystem.is_held(pygame.K_SPACE):
             self.sceneManager.add_event(Event.LOBBY_MENU)
-
-
-
+            print("Switch to lobby")
 

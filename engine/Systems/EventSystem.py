@@ -9,7 +9,7 @@ class EventSystem():
         self.engine = engine
 
 
-    def procces(self, event):
+    def process(self, event):
         #do a command from every event what exist
         if event == Event.LOBBY_MENU:
             self.sceneManager.change_scene(Lobby)

@@ -7,6 +7,7 @@ from engine.Scenes.MainMenu_scene import MainMenu
 
 from engine.Settings.settings import Colors, Settings
 from engine.Systems.EventSystem import EventSystem
+from engine.Systems.InputSystem import InputSystem
 
 
 class Game:
@@ -20,11 +21,10 @@ class Game:
         self.running = True
 
         #engine systems
-
-        self.sceneManager = SceneManager(self.screen, self.clock)
+        self.inputSystem = InputSystem()
+        self.sceneManager = SceneManager(self.screen, self.clock, self.inputSystem)
         self.sceneManager.change_scene(MainMenu)
         self.eventSystem = EventSystem(self.sceneManager, self)
-
 
 
     def run(self):
@@ -39,12 +39,16 @@ class Game:
             #game loop
             self.screen.fill(Colors.BLACK)
 
+
+            #systems handles
             self.sceneManager.handle()
+            self.inputSystem.handle()
+
+
             #============================================================
             # check every event from sceneManager
             if self.sceneManager.event:
                 for event in self.sceneManager.event:
-                    print(event)
                     self.eventSystem.procces(event)
                 # after processing all events clear the event list
                 self.sceneManager.event = []
