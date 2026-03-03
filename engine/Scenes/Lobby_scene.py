@@ -3,12 +3,13 @@ import pygame
 from engine.Scenes.BaseScene import Scene
 from engine.Systems.Event import Event
 from engine.Settings.settings import Colors
+from engine.Scenes.GUIManager import GUI
 
 class Lobby(Scene):
     def __init__(self, sceneManager):
         #GUI system and backgrounds
         self.elements = [pygame.Rect((10,10,10,10))]
-
+        self.gui = GUI()
 
         #self scene manager for events
         self.sceneManager = sceneManager
@@ -19,7 +20,7 @@ class Lobby(Scene):
 
         inputSystem = self.sceneManager.inputSystem
 
-        if key[pygame.K_SPACE] and not inputSystem.is_held(pygame.K_SPACE):
+        if key[pygame.K_SPACE] and inputSystem.is_pressed(pygame.K_SPACE):
             self.sceneManager.add_event(Event.MAIN_MENU)
             print("Switch to main menu")
 
@@ -33,3 +34,5 @@ class Lobby(Scene):
             pygame.draw.rect(screen, Colors.RED, element)
 
 
+    def update(self):
+        pass

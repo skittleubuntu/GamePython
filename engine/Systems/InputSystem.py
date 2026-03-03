@@ -3,18 +3,21 @@ import pygame
 
 class InputSystem():
     def __init__(self):
-        self.key = pygame.key
-        self.mouse = pygame.mouse
-        self.previous = None
-        self.actual = None
-    #check is the key held
-    #check the previous stan of key and present
-
-    def is_held(self, key) -> bool:
-        self.handle()
-        return self.previous[key] and self.actual[key]
+        self.previous_keys = None
+        self.current_keys = pygame.key.get_pressed()
 
 
-    def handle(self):
-        self.previous = self.actual
-        self.actual = self.key.get_pressed()
+
+    #todo mouse clicker
+
+    def update(self):
+        #call one time in loop
+        self.previous_keys = self.current_keys
+        self.current_keys = pygame.key.get_pressed()
+
+    def is_pressed(self, key: int) -> bool:
+       #if prevoius stan is False than this button is clicked first time
+        return self.current_keys[key] and not self.previous_keys[key]
+
+    def is_held(self, key: int) -> bool:
+        return self.current_keys[key]

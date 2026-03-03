@@ -17,13 +17,15 @@ class SceneManager():
         self.scene = scene(self)
 
 
-    #handle events
+    #handle scene, updates and buttons
     def handle(self,):
         self.scene.handle_button()
+        self.scene.update()
 
 
     def render_scene(self):
         self.scene.render(self.screen)
+        self.scene.gui.draw_elements(self.screen)
 
 
     #send event to core (engine)

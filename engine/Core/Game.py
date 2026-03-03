@@ -42,14 +42,14 @@ class Game:
 
             #systems handles
             self.sceneManager.handle()
-            self.inputSystem.handle()
+            self.inputSystem.update()
 
 
             #============================================================
             # check every event from sceneManager
             if self.sceneManager.event:
                 for event in self.sceneManager.event:
-                    self.eventSystem.procces(event)
+                    self.eventSystem.process(event)
                 # after processing all events clear the event list
                 self.sceneManager.event = []
             # ============================================================
