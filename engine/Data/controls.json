@@ -1,0 +1,10 @@
+{
+  "left": "a",
+  "right": "d",
+  "up": "w",
+  "down": "s",
+  "shoot":"space",
+  "turn_right": "right",
+  "turn_left": "left"
+
+}

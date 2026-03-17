@@ -1,11 +1,37 @@
+import pygame
+import json
+
 #screen
 class Settings:
 
 
     def __init__(self):
+        #game screen settings
         self.WIDTH = 1200
         self.HEIGHT = 700
         self.FPS = 60
+        self.DT = None
+
+
+        #input settings
+        self.controls = {}
+
+
+
+
+
+
+    def load_from_json(self, json_file):
+
+        with open(json_file) as f:
+            data = json.load(f)
+
+            for action in data:
+                self.controls[action] = pygame.key.key_code(data[action])
+
+        print(self.controls)
+
+
 
 
 

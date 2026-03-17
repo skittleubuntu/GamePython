@@ -1,33 +1,101 @@
 
 from engine.Scenes import *
-import pygame
+from engine.Scenes.BaseScene import *
+from engine.Settings.settings import Colors
+import pygame, time
 
 class SceneManager():
-    def __init__(self, screen, clock, inputSystem):
+    def __init__(self, screen:pygame.display, inputSystem, settings):
+        #scenes for rendering and updates
         self.scene = None
+        self.overlay_scene = None
+
         self.screen = screen
-        self.clock = clock
+
+
+        #events for eventsystem
         self.event = []
-        self.keyboard = pygame.key
-        self.mouse = pygame.mouse
+
+        #-----
+        self.scenes = {}
+        self.overlay_scenes = {}
+        #-------
+
+
+        #pygame events
+        self.pygame_event = None
+
         self.inputSystem = inputSystem
+        self.settings = settings
+
+        # once update variable created for updating scene when we create a overlay scene
+        # for making all button un-hovered
+        self.once_update = False
+
+
+
 
     #change the current scene
-    def change_scene(self, scene):
-        self.scene = scene(self)
+    def change_scene(self, scene:Scene):
+        self.scene = self.scenes[scene]
+
+
+    def set_overlay_scene(self, overlay_scene:OverlayScene):
+        self.overlay_scene = self.overlay_scenes[overlay_scene]
+        print("seted a new overlay Scene")
+
+    def remove_overlay_scene(self):
+        self.overlay_scene = None
+        print("Overlay scene is off")
 
 
     #handle scene, updates and buttons
     def handle(self,):
-        self.scene.handle_button()
-        self.scene.update()
+        #updatating main scene or overlay scene
+        if self.overlay_scene is None:
+            self.scene.handle_button()
+            self.scene.update()
+            self.once_update = False
+        else:
+            if not self.once_update:
+                self.scene.update()
+                self.once_update = True
+            self.overlay_scene.handle_button()
+            self.overlay_scene.update()
+
+
 
 
     def render_scene(self):
         self.scene.render(self.screen)
         self.scene.gui.draw_elements(self.screen)
+        if self.overlay_scene is not None:
+            #draw overlay scene with darkness
+            darkness = pygame.surface.Surface((self.settings.WIDTH, self.settings.HEIGHT))
+            darkness.set_alpha(122)
+            darkness.fill(Colors.BLACK)
+            self.screen.blit(darkness,(0,0))
+            #todo
+
 
 
     #send event to core (engine)
     def add_event(self, event):
         self.event.append(event)
+
+
+    #prepearing scenes for render
+    def initialization(self,scenes, overlay_scenes):
+        # loading in percentes
+        loading = 0
+        #how many percent are plused when one scene is prepared
+        percent = 100 / (len(scenes) + len(overlay_scenes))
+        for scene in scenes:
+            self.scenes[scene] = scene(self)
+            loading += percent
+            print(f"Loading: {loading}]")
+
+        for overlayScene in overlay_scenes:
+            self.overlay_scenes[overlayScene] = overlayScene(self)
+            loading += percent
+            print(f"Loading: {loading}")

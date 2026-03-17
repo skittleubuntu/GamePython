@@ -3,13 +3,12 @@ import pygame
 from engine.Scenes.BaseScene import Scene
 from engine.Systems.Event import Event
 from engine.Settings.settings import Colors
-from engine.Scenes.GUIManager import GUI
+from engine.Core.GUIManager import GUI
 
-class Lobby(Scene):
+class LobbyScene(Scene):
     def __init__(self, sceneManager):
         #GUI system and backgrounds
-        self.elements = [pygame.Rect((10,10,10,10))]
-        self.gui = GUI()
+        self.gui = GUI(sceneManager)
 
         #self scene manager for events
         self.sceneManager = sceneManager
