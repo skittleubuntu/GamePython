@@ -1,4 +1,4 @@
-from engine.Core.GUIManager import *
+from engine.Core.GUISystem.GUIManager import *
 from engine.Core.SceneManager import SceneManager
 from engine.Scenes.BaseScene import Scene, OverlayScene
 from engine.Systems.Event import *

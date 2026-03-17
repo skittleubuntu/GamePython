@@ -3,7 +3,7 @@ import pygame
 from engine.Scenes.BaseScene import Scene
 from engine.Systems.Event import Event
 from engine.Settings.settings import Colors
-from engine.Core.GUIManager import GUI
+from engine.Core.GUISystem.GUIManager import GUI
 
 class LobbyScene(Scene):
     def __init__(self, sceneManager):

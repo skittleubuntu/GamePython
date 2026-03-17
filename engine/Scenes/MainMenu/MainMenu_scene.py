@@ -5,7 +5,7 @@ from engine.Scenes.BaseScene import Scene
 
 from engine.Settings.settings import Colors
 from engine.Systems.Event import Event
-from engine.Core.GUIManager import GUI, Button, Text, Entry
+from engine.Core.GUISystem.GUIManager import GUI, Button, Text, Entry
 
 
 
