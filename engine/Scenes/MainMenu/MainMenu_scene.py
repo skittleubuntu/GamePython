@@ -5,7 +5,10 @@ from engine.Scenes.BaseScene import Scene
 
 from engine.Settings.settings import Colors
 from engine.Systems.Event import Event
-from engine.Core.GUISystem.GUIManager import GUI, Button, Text, Entry
+from engine.Core.GUISystem.Text import Text
+from engine.Core.GUISystem.Entry import Entry
+from engine.Core.GUISystem.Button import Button
+from engine.Core.GUISystem.GUIManager import GUI
 
 
 
@@ -20,10 +23,10 @@ class MainMenuScene(Scene):
         self.gui.add_text(Text(x=500, y=60, text="Pixel", textSize=100, color=Colors.YELLOW))
         self.gui.add_text(Text(x=600, y=180, text="Battle", textSize=100, color=Colors.YELLOW))
 
-        self.gui.add_entry(Entry(x=500, text="write some text", width=1000, color=Colors.GRAY), "first")
+        self.gui.add_entry(Entry(x=500, text="write some text", width=1000, color=Colors.DARK_GRAY), "first")
 
 
-
+        self.gui.add_text(Text(x=1000, y=10, textSize=70, color=Colors.ORANGE, text=None), id="FPS")
 
         #============================================================
 
@@ -41,11 +44,8 @@ class MainMenuScene(Scene):
 
 
     def update(self):
-        self.gui.update_elements()
-        for event in self.gui.events:
-            self.sceneManager.add_event(event)
-        self.gui.events = []
-
+        fps_text = self.gui.get_text_by_id("FPS")
+        fps_text.edit_text(f"{self.sceneManager.settings.actual_fps}")
 
     #check the pressed button
     def handle_button(self):

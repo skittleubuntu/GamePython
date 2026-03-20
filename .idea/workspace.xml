@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="1af07f17-0554-4ebe-b02a-35dce593ce5c" name="Changes" comment="GUI system and smal details" />
+    <list default="true" id="1af07f17-0554-4ebe-b02a-35dce593ce5c" name="Changes" comment="GUISystem">
+      <change beforePath="$PROJECT_DIR$/engine/Core/GUISystem/GUIManager.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/Core/GUISystem/GUIManager.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/engine/Systems/InputSystem.py" beforeDir="false" afterPath="$PROJECT_DIR$/engine/Systems/InputSystem.py" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -13,6 +16,7 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
+        <option value="package.json" />
         <option value="Python Script" />
       </list>
     </option>
@@ -54,6 +58,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "git-widget-placeholder": "main",
+    "last_opened_file_path": "/Users/macbook/PycharmProjects/GamePython/engine/Settings/Fonts",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -64,10 +69,15 @@
   }
 }]]></component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/engine/Settings/Fonts" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/engine/Settings" />
+      <recent name="$PROJECT_DIR$/engine/Core/GUISystem" />
+      <recent name="$PROJECT_DIR$/engine/Scenes/Settings" />
       <recent name="$PROJECT_DIR$/engine/Core" />
-      <recent name="$PROJECT_DIR$/engine" />
+      <recent name="$PROJECT_DIR$/engine/Scenes/Lobby" />
+      <recent name="$PROJECT_DIR$/engine/Scenes/MainMenu" />
     </key>
   </component>
   <component name="RunManager" selected="Python.main">
@@ -212,6 +222,7 @@
       <workItem from="1769622320201" duration="8220000" />
       <workItem from="1770600334744" duration="19511000" />
       <workItem from="1772032606120" duration="39447000" />
+      <workItem from="1772627874213" duration="74132000" />
     </task>
     <task id="LOCAL-00001" summary="Start of a projekt">
       <option name="closed" value="true" />
@@ -293,7 +304,23 @@
       <option name="project" value="LOCAL" />
       <updated>1772572118508</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="optimization loading and GUI">
+      <option name="closed" value="true" />
+      <created>1773755142282</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1773755142282</updated>
+    </task>
+    <task id="LOCAL-00012" summary="GUISystem">
+      <option name="closed" value="true" />
+      <created>1773764657548</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1773764657548</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -306,12 +333,14 @@
     <MESSAGE value="new start" />
     <MESSAGE value="input system" />
     <MESSAGE value="GUI system and smal details" />
-    <option name="LAST_COMMIT_MESSAGE" value="GUI system and smal details" />
+    <MESSAGE value="optimization loading and GUI" />
+    <MESSAGE value="GUISystem" />
+    <option name="LAST_COMMIT_MESSAGE" value="GUISystem" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/GamePython$server.coverage" NAME="server Coverage Results" MODIFIED="1764844910127" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GamePython$gui.coverage" NAME="gui Coverage Results" MODIFIED="1763726802002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/GamePython$main.coverage" NAME="main Coverage Results" MODIFIED="1772572071965" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/GamePython$main.coverage" NAME="main Coverage Results" MODIFIED="1773755068471" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/GamePython$battle.coverage" NAME="battle Coverage Results" MODIFIED="1765211184002" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

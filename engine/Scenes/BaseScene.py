@@ -20,6 +20,16 @@ class Scene(ABC):
         pass
 
 
+    def update_gui(self):
+        self.gui.update_elements()
+        for event in self.gui.events:
+            self.sceneManager.add_event(event)
+        self.gui.events = []
+
+    def set_kwargs(self, **kwargs):
+        pass
+
+
 class OverlayScene(ABC):
 
     @abstractmethod
@@ -35,4 +45,13 @@ class OverlayScene(ABC):
     @abstractmethod
     def handle_button(self):
         # input handeling
+        pass
+
+    def update_gui(self):
+        self.gui.update_elements()
+        for event in self.gui.events:
+            self.sceneManager.add_event(event)
+        self.gui.events = []
+
+    def set_kwargs(self, **kwargs):
         pass

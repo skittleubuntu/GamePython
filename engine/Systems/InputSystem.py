@@ -9,7 +9,7 @@ class InputSystem():
 
         #last pressed letter
         self.pressed_letter = None
-
+        self.mouse = pygame.mouse
         self.is_lmb_pressed = False
 
 
@@ -22,7 +22,6 @@ class InputSystem():
 
 
     def get_pressed_letter(self):
-        #fix bugs todo
         if self.pressed_letter:
             letter = self.pressed_letter.unicode
             return letter
@@ -31,6 +30,10 @@ class InputSystem():
         if self.pressed_letter:
             key = self.pressed_letter.key
             return key
+
+
+    def get_mouse_pos(self):
+        return self.mouse.get_pos()
 
     #handle pygame event for checking the last pressed letter
     def handle_event(self, event):

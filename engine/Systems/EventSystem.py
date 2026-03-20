@@ -1,6 +1,8 @@
 from engine.Scenes.Lobby.Lobby_scene import LobbyScene
 from engine.Scenes.MainMenu.MainMenu_scene import MainMenuScene
-from engine.Scenes.Settings.Setting_Scene import SettingsScene, SetNewButtonOverlay
+from engine.Scenes.Settings.Setting_Scene import SettingsScene
+from engine.Scenes.Settings.SetNewButton_Overlayscene import *
+
 from engine.Systems.Event import Event
 import time
 
@@ -9,15 +11,22 @@ class EventSystem():
         self.sceneManager = sceneManager
         self.engine = engine
 
-        self.handlers = {
-            Event.LOBBY_MENU: lambda: self.sceneManager.change_scene(LobbyScene),
-            Event.MAIN_MENU: lambda: self.sceneManager.change_scene(MainMenuScene),
-            Event.QUIT_GAME: self.engine.quit,
-            Event.SETTING_MENU: lambda: self.sceneManager.change_scene(SettingsScene),
-            Event.SET_NEW_BUTTON: lambda: self.sceneManager.set_overlay_scene(SetNewButtonOverlay),
-            Event.OFF_OVERLAY: self.sceneManager.remove_overlay_scene
-        }
-
     def process(self, event):
-        if event in self.handlers:
-            self.handlers[event]()
+        if event == Event.LOBBY_MENU:
+            self.sceneManager.change_scene(LobbyScene)
+
+        elif event == Event.MAIN_MENU:
+            self.sceneManager.change_scene(MainMenuScene)
+
+        elif event == Event.QUIT_GAME:
+            self.engine.quit()
+
+        elif event == Event.SETTING_MENU:
+            self.sceneManager.change_scene(SettingsScene)
+
+
+        elif event == Event.SET_NEW_BUTTON_UP:
+            self.sceneManager.set_overlay_scene(SetNewButton, flag="UP")
+
+        elif event == Event.OFF_OVERLAY:
+            self.sceneManager.remove_overlay_scene()

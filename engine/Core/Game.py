@@ -5,7 +5,8 @@ import time
 from engine.Core.SceneManager import SceneManager
 from engine.Scenes.Lobby.Lobby_scene import LobbyScene
 from engine.Scenes.MainMenu.MainMenu_scene import MainMenuScene
-from engine.Scenes.Settings.Setting_Scene import SettingsScene, SetNewButtonOverlay
+from engine.Scenes.Settings.Setting_Scene import SettingsScene
+from engine.Scenes.Settings.SetNewButton_Overlayscene import *
 
 from engine.Settings.settings import Colors, Settings
 from engine.Systems.EventSystem import EventSystem
@@ -18,7 +19,8 @@ class Game:
         #core initialization (pygame)
         pygame.init()
         self.settings = Settings()
-        self.settings.load_from_json("engine/Data/controls.json")
+        self.settings.load_controls_from_json("engine/Data/controls.json")
+        self.settings.load_settings_from_json("engine/Data/settings.json")
         self.screen = pygame.display.set_mode((self.settings.WIDTH, self.settings.HEIGHT))
         self.clock = pygame.time.Clock()
         self.running = True
@@ -33,7 +35,7 @@ class Game:
 
         # initialization engine systems
         scenes = [MainMenuScene, SettingsScene, LobbyScene, ]
-        overlay_scenes = [SetNewButtonOverlay]
+        overlay_scenes = [SetNewButton]
         self.sceneManager.initialization(scenes, overlay_scenes)
         self.sceneManager.change_scene(MainMenuScene)
 
@@ -72,9 +74,11 @@ class Game:
 
 
             self.sceneManager.render_scene()
+
             #update the DT time (delta time)
             pygame.display.flip()
             self.settings.DT = self.clock.tick(self.settings.FPS) / 1000
+            self.settings.update_game_info(self.clock)
             self.inputSystem.clear_bufeer()
 
 
@@ -82,4 +86,5 @@ class Game:
     #shutdown a game and server
     def quit(self):
         self.running = False
+        print("Game closed!")
         sys.exit()

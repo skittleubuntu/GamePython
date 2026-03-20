@@ -36,12 +36,16 @@ class SceneManager():
 
 
     #change the current scene
-    def change_scene(self, scene:Scene):
+    def change_scene(self, scene:Scene, **kwargs):
         self.scene = self.scenes[scene]
+        if kwargs:
+            self.scene.set_kwargs(**kwargs)
 
 
-    def set_overlay_scene(self, overlay_scene:OverlayScene):
+    def set_overlay_scene(self, overlay_scene:OverlayScene, **kwargs):
         self.overlay_scene = self.overlay_scenes[overlay_scene]
+        if kwargs:
+            self.overlay_scene.set_kwargs(**kwargs)
         print("seted a new overlay Scene")
 
     def remove_overlay_scene(self):
@@ -55,13 +59,16 @@ class SceneManager():
         if self.overlay_scene is None:
             self.scene.handle_button()
             self.scene.update()
+            self.scene.update_gui()
             self.once_update = False
         else:
             if not self.once_update:
                 self.scene.update()
+                self.scene.update_gui()
                 self.once_update = True
             self.overlay_scene.handle_button()
             self.overlay_scene.update()
+            self.overlay_scene.update_gui()
 
 
 
@@ -75,7 +82,8 @@ class SceneManager():
             darkness.set_alpha(122)
             darkness.fill(Colors.BLACK)
             self.screen.blit(darkness,(0,0))
-            #todo
+            self.overlay_scene.render(self.screen)
+            self.overlay_scene.gui.draw_elements(self.screen)
 
 
 
@@ -93,7 +101,7 @@ class SceneManager():
         for scene in scenes:
             self.scenes[scene] = scene(self)
             loading += percent
-            print(f"Loading: {loading}]")
+            print(f"Loading: {loading}")
 
         for overlayScene in overlay_scenes:
             self.overlay_scenes[overlayScene] = overlayScene(self)

@@ -9,30 +9,44 @@ class Settings:
         #game screen settings
         self.WIDTH = 1200
         self.HEIGHT = 700
-        self.FPS = 60
+        self.FPS = 120
         self.DT = None
 
 
         #input settings
         self.controls = {}
 
+        #player name
+        self.player_name = None
+
+        #game info
+        self.actual_fps = None
 
 
 
 
-
-    def load_from_json(self, json_file):
-
+    #load controls
+    def load_controls_from_json(self, json_file):
         with open(json_file) as f:
             data = json.load(f)
-
             for action in data:
                 self.controls[action] = pygame.key.key_code(data[action])
 
-        print(self.controls)
+
+    def load_settings_from_json(self, json_file):
+        with open(json_file) as f:
+            data = json.load(f)
+            self.player_name = data["player_name"]
+        print(self.player_name)
 
 
+    #get key name
+    def get_key_name(self, action):
+        key = self.controls[action]
+        return pygame.key.name(key)
 
+    def update_game_info(self, clock):
+        self.actual_fps = clock.get_fps()
 
 
 
