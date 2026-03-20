@@ -66,7 +66,7 @@ class Game:
             # check every event from sceneManager
             if self.sceneManager.event:
                 for event in self.sceneManager.event:
-                    print(f"Events: {event}")
+
                     self.eventSystem.process(event)
                 # after processing all events clear the event list
                 self.sceneManager.event = []

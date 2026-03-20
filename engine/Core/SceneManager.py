@@ -9,7 +9,7 @@ class SceneManager():
         #scenes for rendering and updates
         self.scene = None
         self.overlay_scene = None
-
+        self.darkness_overlay = None
         self.screen = screen
 
 
@@ -70,19 +70,18 @@ class SceneManager():
             self.overlay_scene.update()
             self.overlay_scene.update_gui()
 
-
-
-
     def render_scene(self):
         self.scene.render(self.screen)
         self.scene.gui.draw_elements(self.screen)
         if self.overlay_scene is not None:
-            #draw overlay scene with darkness
-            darkness = pygame.surface.Surface((self.settings.WIDTH, self.settings.HEIGHT))
-            darkness.set_alpha(122)
-            darkness.fill(Colors.BLACK)
-            self.screen.blit(darkness,(0,0))
-            self.overlay_scene.render(self.screen)
+            if self.darkness_overlay is None:
+                self.darkness_overlay = pygame.Surface(
+                    (self.settings.WIDTH, self.settings.HEIGHT)
+                )
+                self.darkness_overlay.set_alpha(122)
+                self.darkness_overlay.fill(Colors.BLACK)
+
+            self.screen.blit(self.darkness_overlay, (0, 0))
             self.overlay_scene.gui.draw_elements(self.screen)
 
 

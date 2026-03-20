@@ -62,7 +62,7 @@ class GUI():
 
     #update buttons (is their hovered or not)
     def update_elements(self):
-
+            #todo update only when mouse is moving
             #button updates
             m_pos = self.scene_manager.inputSystem.get_mouse_pos()
             for button in self.buttons:
