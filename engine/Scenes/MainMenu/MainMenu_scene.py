@@ -33,6 +33,7 @@ class MainMenuScene(Scene):
 
         #self scene manager for control scenes
         self.sceneManager = sceneManager
+        self.input_system = self.sceneManager.inputSystem
         self.player = Player()
 
 
@@ -47,21 +48,22 @@ class MainMenuScene(Scene):
         fps_text = self.gui.get_text_by_id("FPS")
         fps_text.edit_text(f"{self.sceneManager.settings.actual_fps}")
 
+
     #check the pressed button
     def handle_button(self):
-        inputSystem = self.sceneManager.inputSystem
+
         controls = self.sceneManager.settings.controls
 
-        if inputSystem.is_held(controls["up"]):
-            self.player.y -= 5
-        if inputSystem.is_held(controls["down"]):
-            self.player.y += 5
-        if inputSystem.is_held(controls["right"]):
-            self.player.x += 5
-        if inputSystem.is_held(controls["left"]):
-            self.player.x -= 5
+        if self.input_system.is_held(controls["up"]):
+            self.player.y -= 100 * self.sceneManager.settings.DT
+        if self.input_system.is_held(controls["down"]):
+            self.player.y += 100 * self.sceneManager.settings.DT
+        if self.input_system.is_held(controls["right"]):
+            self.player.x += 100 * self.sceneManager.settings.DT
+        if self.input_system.is_held(controls["left"]):
+            self.player.x -= 100 * self.sceneManager.settings.DT
 
-        if inputSystem.is_pressed(pygame.K_SPACE):
+        if self.input_system.is_pressed(pygame.K_SPACE):
             self.sceneManager.add_event(Event.LOBBY_MENU)
             print("Switch to lobby")
 

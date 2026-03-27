@@ -26,6 +26,7 @@ class GUI():
         #entries,textes placed by id
         self.entries_id = {}
         self.textes_id = {}
+        self.buttons_id = {}
         self.selected_entry = None
 
         #scene manager for adaptive checking
@@ -36,8 +37,11 @@ class GUI():
 
 
     #add a new button to gui boxes
-    def add_button(self, button:Button):
+    def add_button(self, button:Button, id=None):
         self.buttons.append(button)
+
+        if id:
+            self.buttons_id[id] = button
 
     # add a new text to gui boxes
     def add_text(self, text: Text, id=None):
@@ -93,6 +97,9 @@ class GUI():
                 if key == pygame.K_BACKSPACE:
                     self.selected_entry.writed_text = self.selected_entry.writed_text[:-1]
 
+                elif key == pygame.K_SPACE:
+                    self.selected_entry.writed_text += " "
+
                 elif letter:
                     self.selected_entry.writed_text += letter
 
@@ -107,6 +114,10 @@ class GUI():
     def get_entry_by_id(self, id) -> Entry:
         # todo checking for correct id
         return self.entries_id[id]
+
+    def get_button_by_id(self, id) -> Button:
+        # todo checking for correct id
+        return self.buttons_id[id]
 
 
 

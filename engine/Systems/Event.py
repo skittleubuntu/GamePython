@@ -17,6 +17,8 @@ class Event():
     SET_NEW_BUTTON_TURNR = 106
     SET_NEW_BUTTON_SHOOT = 107
 
+    RESET_SETTINGS_FLAG = 108
+
     #system event -900
     QUIT_GAME = 901
     OFF_OVERLAY = 902

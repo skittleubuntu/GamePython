@@ -3,6 +3,7 @@ import sys
 import pygame,os
 import time
 from engine.Core.SceneManager import SceneManager
+from engine.Scenes.Loading_Overlay import LoadingScene
 from engine.Scenes.Lobby.Lobby_scene import LobbyScene
 from engine.Scenes.MainMenu.MainMenu_scene import MainMenuScene
 from engine.Scenes.Settings.Setting_Scene import SettingsScene
@@ -34,10 +35,12 @@ class Game:
         self.eventSystem = EventSystem(self.sceneManager, self)
 
         # initialization engine systems
-        scenes = [MainMenuScene, SettingsScene, LobbyScene, ]
-        overlay_scenes = [SetNewButton]
+        scenes = [MainMenuScene, SettingsScene, LobbyScene]
+        overlay_scenes = [SetNewButton, LoadingScene]
         self.sceneManager.initialization(scenes, overlay_scenes)
+        self.sceneManager.remove_overlay_scene()
         self.sceneManager.change_scene(MainMenuScene)
+
 
 
         #checking the powerfull of engine (fps, time beetwen cycles)
@@ -80,6 +83,7 @@ class Game:
             self.settings.DT = self.clock.tick(self.settings.FPS) / 1000
             self.settings.update_game_info(self.clock)
             self.inputSystem.clear_bufeer()
+
 
 
 

@@ -1,6 +1,7 @@
 
 from engine.Scenes import *
 from engine.Scenes.BaseScene import *
+
 from engine.Settings.settings import Colors
 import pygame, time
 
@@ -16,9 +17,11 @@ class SceneManager():
         #events for eventsystem
         self.event = []
 
+
+        #loaded scenes and overlay scenes
         #-----
-        self.scenes = {}
-        self.overlay_scenes = {}
+        self.cashed_scenes = {}
+        self.cashed_overlay_scenes = {}
         #-------
 
 
@@ -37,13 +40,13 @@ class SceneManager():
 
     #change the current scene
     def change_scene(self, scene:Scene, **kwargs):
-        self.scene = self.scenes[scene]
+        self.scene = self.cashed_scenes[scene]
         if kwargs:
             self.scene.set_kwargs(**kwargs)
 
 
     def set_overlay_scene(self, overlay_scene:OverlayScene, **kwargs):
-        self.overlay_scene = self.overlay_scenes[overlay_scene]
+        self.overlay_scene = self.cashed_overlay_scenes[overlay_scene]
         if kwargs:
             self.overlay_scene.set_kwargs(**kwargs)
         print("seted a new overlay Scene")
@@ -71,8 +74,10 @@ class SceneManager():
             self.overlay_scene.update_gui()
 
     def render_scene(self):
-        self.scene.render(self.screen)
-        self.scene.gui.draw_elements(self.screen)
+
+        if self.scene:
+            self.scene.render(self.screen)
+            self.scene.gui.draw_elements(self.screen)
         if self.overlay_scene is not None:
             if self.darkness_overlay is None:
                 self.darkness_overlay = pygame.Surface(
@@ -86,9 +91,12 @@ class SceneManager():
 
 
 
+
     #send event to core (engine)
     def add_event(self, event):
         self.event.append(event)
+
+
 
 
     #prepearing scenes for render
@@ -98,11 +106,13 @@ class SceneManager():
         #how many percent are plused when one scene is prepared
         percent = 100 / (len(scenes) + len(overlay_scenes))
         for scene in scenes:
-            self.scenes[scene] = scene(self)
+            self.cashed_scenes[scene] = scene(self)
             loading += percent
             print(f"Loading: {loading}")
 
         for overlayScene in overlay_scenes:
-            self.overlay_scenes[overlayScene] = overlayScene(self)
+            self.cashed_overlay_scenes[overlayScene] = overlayScene(self)
             loading += percent
             print(f"Loading: {loading}")
+
+

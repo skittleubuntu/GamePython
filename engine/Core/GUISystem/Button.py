@@ -38,3 +38,6 @@ class Button(GUIElement):
         textRect.center = (self.x + self.width//2 , self.y + self.height//2)
         screen.blit(text,textRect)
 
+    def change_text(self, text):
+        self.text = text
+

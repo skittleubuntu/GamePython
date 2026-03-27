@@ -26,7 +26,22 @@ class EventSystem():
 
 
         elif event == Event.SET_NEW_BUTTON_UP:
-            self.sceneManager.set_overlay_scene(SetNewButton, flag="UP")
+            self.sceneManager.set_overlay_scene(SetNewButton, flag="up")
+
+        elif event == Event.SET_NEW_BUTTON_DOWN:
+            self.sceneManager.set_overlay_scene(SetNewButton, flag="down")
+
+        elif event == Event.SET_NEW_BUTTON_RIGHT:
+            self.sceneManager.set_overlay_scene(SetNewButton, flag="right")
+
+        elif event == Event.SET_NEW_BUTTON_LEFT:
+            self.sceneManager.set_overlay_scene(SetNewButton, flag="left")
 
         elif event == Event.OFF_OVERLAY:
             self.sceneManager.remove_overlay_scene()
+
+
+        #set all flags on setting scene on FALSE
+        elif event == Event.RESET_SETTINGS_FLAG:
+            self.sceneManager.cashed_scenes[SettingsScene].buttons_updated = False
+            print("flags reseted")
